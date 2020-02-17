@@ -1,0 +1,22 @@
+extends ../base 
+
+block title
+    title Login Page
+
+block content
+
+    div.container-fluid
+        div.row
+            div.container.bg-white.mt-5.col-md-5.p-5
+                div.container.text-center.jumbotron.text-primary
+                    h1 Login
+                    
+                form(method = 'POST' action='/auth/login')
+                    div.form-group
+                        label( for='email') Email : 
+                        input( type='text' placeholder= 'Enter email' name='email').form-control
+                    div.form-group
+                        label( for='password') Password: 
+                        input( type='password' placeholder= 'Enter password' name='password').form-control
+                    button.btn.btn-primary.w-100.p-3.mt-3 Submit
+    
