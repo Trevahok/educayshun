@@ -1,4 +1,5 @@
 import Joi from "@hapi/joi";
+import constants from "../constants.mjs";
 
 
 export const loginValidator = Joi.object({
@@ -7,10 +8,11 @@ export const loginValidator = Joi.object({
 })
 
 export const signupValidator = Joi.object({
+    name: Joi.string().required(),
     email: Joi.string().email().required(),
     password: Joi.string().min(3).max(15).required(),
     confirmPassword: Joi.any().valid(Joi.ref('password')).required(),
     address: Joi.string().max(1024).required(false),
-    role: Joi.string(),
+    role: Joi.string().valid(constants.student, constants.faculty),
 
 })

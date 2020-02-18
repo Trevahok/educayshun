@@ -9,10 +9,17 @@ nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
         a.nav-link(href='/courses') Courses
 
     ul.navbar-nav.float-right
-      li.nav-item
-        a.nav-link(href='/auth/login') Login
-      li.nav-item
-        a.nav-link(href='/auth/signup') Signup
+      if(!isAuthenticated() && !user)
+        li.nav-item
+          a.nav-link(href='/auth/login?next=' + path) Login
+        li.nav-item
+          a.nav-link(href='/auth/signup') Signup
+      else
+        li.nav-item
+          a.nav-link(href='/auth/profile')= user.name 
+        li.nav-item
+          a.nav-link(href='/auth/logout') Logout
+
       //- li.nav-item.dropdown
       //-   a.nav-link.dropdown-toggle(id='navbarDropdownMenuLink', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false') Accounts
       //-   .dropdown-menu(aria-labelledby='navbarDropdownMenuLink')

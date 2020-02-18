@@ -1,14 +1,21 @@
+import constants from '../constants.mjs'
 
 var loginForm =  {
     title: 'Login Page',
     fields:[
         {
             name: 'Email',
-            type: 'email'
+            type: 'email',
+            attrs:{
+                placeholder: 'Enter your email id... '
+            }
         },
         {
             name: 'password',
-            type: 'password'
+            type: 'password',
+            attrs:{
+                placeholder: 'Enter your password... '
+            }
         }
     ]
 }
@@ -16,6 +23,9 @@ var loginForm =  {
 var signupForm = {
     title: "Signup Page",
     fields : [
+        {
+            name: 'name',
+        },
         {
             name: 'Email',
             type: 'email'
@@ -36,7 +46,7 @@ var signupForm = {
         {
             name: 'Role',
             widget:'select',
-            values : ['faculty', 'student']
+            values : [constants.faculty ,constants.student]
         }
     ]
 

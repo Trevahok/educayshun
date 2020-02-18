@@ -42,6 +42,12 @@ block content
                     strong= error
                     button( type="button" class="close" data-dismiss="alert" aria-label="Close" )
                         span(aria-hidden="true") &times;
+        - if(messages)
+            - for(let message of messages )
+                div( class="alert alert-info alert-dismissible fade show" role="alert" ).w-100
+                    strong= message
+                    button( type="button" class="close" data-dismiss="alert" aria-label="Close" )
+                        span(aria-hidden="true") &times;
         .card
             .card-header.text-center.text-white.bg-info
                 =title(form.title)
@@ -54,16 +60,19 @@ block content
                                     if( field.widget === 'radio' || field.widget === 'checkbox')
                                             for value in field.values
                                                 .form-check.form-check-inline
-                                                    input(id = camelize(field.name+ '_' + value) name =camelize(field.name) type=field.widget value=value )&attributes(  field.attrs   ).form-check-input
+                                                    input(id = camelize(field.name+ '_' + value) name =camelize(field.name) type=field.widget value= value  )&attributes(  field.attrs   ).form-check-input
                                                     label.form-check-label= title(value)
                                     else if( field.widget === 'select' )
                                         select(id = camelize(field.name) name =camelize(field.name) multiple=field.multiple type = field.type || 'text')&attributes(  field.attrs   ).form-control
                                             for value in field.values
-                                                option= value
+                                                option( selected= (field.default == value || (form.values && form.values[camelize(field.name)] == value) )  )= value
 
                                     else
-                                        #{field.widget || 'input'}(id = camelize(field.name) name =camelize(field.name) type = field.type )&attributes(  field.attrs   ).form-control
+                                        if(form.values )
+                                            #{field.widget || 'input'}(id = camelize(field.name) name =camelize(field.name) type = field.type  value = field.default || form.values[camelize(field.name)] )&attributes(  field.attrs   ).form-control
+                                        else
+                                            #{field.widget || 'input'}(id = camelize(field.name) name =camelize(field.name) type = field.type  value = field.default  )&attributes(  field.attrs   ).form-control
                                     if(field.helpText)
-                                        small.text-warning= field.helpText
+                                        small.text-info= field.helpText
                 .card-footer.p-0
                     button.container-fluid.btn.btn-success=  form.submitText || "Submit"
