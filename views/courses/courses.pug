@@ -1,0 +1,45 @@
+
+extends ../base
+
+block title 
+    title Course List
+
+block content 
+    .container.mt-5
+        if(messages)
+         for message in messages 
+            div( class="alert alert-info alert-dismissible fade show" role="alert" ).w-100
+                strong= message
+                button( type="button" class="close" data-dismiss="alert" aria-label="Close" )
+                    span(aria-hidden="true") &times;
+    .container.mt-5
+        .card
+            .card-header.text-center.bg-info.text-white Courses offered
+            .card-body.content-center
+                if( user.role === 'faculty')
+                    a.btn.btn-success(href = '/courses/add') Add Course
+                if(courses )
+                    table.table.mt-4
+                        thead.thead-dark
+                            th Course Title
+                            th Start Date
+                            th End Date
+                            th Seats Left
+                            if( user.role === 'faculty')
+                                th Edit
+                                th Delete
+                        tbody
+                            for course in courses
+                                tr
+                                    td= course.title
+                                    td= course.from.toLocaleDateString()
+                                    td= course.to.toLocaleDateString()
+                                    td= course.capacity
+                                    if( user.role === 'faculty')
+                                        td
+                                            button.btn.btn-secondary Edit
+                                        td
+                                            button.btn.btn-danger Delete
+
+                else
+                    .container-fluid.text-center No course found at this time :(

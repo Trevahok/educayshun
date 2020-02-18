@@ -24,7 +24,7 @@ export const accessRequiredMiddleware = (role)=>{
     return  (req, res , next) =>{
         console.log(role)
         if( req.session.user.role !== role ){
-            req.session.messages = [ 'Sorry, you do not have the clearance for this operation. Required role: ' +role]
+            req.session.messages = [ 'Sorry, you do not have the clearance for this operation. Please re-login with Required role: ' +role]
             res.redirect('/auth/login?next=' + req.originalUrl)
         }
         else

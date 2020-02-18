@@ -5,8 +5,11 @@ nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
   
   .collapse.navbar-collapse(id='navbarSupportedContent')
     ul.navbar-nav.mr-auto
-      li.nav-item.active
-        a.nav-link(href='/courses') Courses
+      li.nav-item.dropdown
+        a.nav-link.dropdown-toggle(id='navbarDropdownMenuLink', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false') Courses
+        .dropdown-menu(aria-labelledby='navbarDropdownMenuLink')
+          a.dropdown-item(href='/courses') List courses
+          a.dropdown-item(href='/courses/add') Add courses
 
     ul.navbar-nav.float-right
       if(!isAuthenticated() && !user)
@@ -20,9 +23,5 @@ nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
         li.nav-item
           a.nav-link(href='/auth/logout') Logout
 
-      //- li.nav-item.dropdown
-      //-   a.nav-link.dropdown-toggle(id='navbarDropdownMenuLink', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false') Accounts
-      //-   .dropdown-menu(aria-labelledby='navbarDropdownMenuLink')
-      //-     a.dropdown-item(href='#') Settings
 
           

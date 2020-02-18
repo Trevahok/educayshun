@@ -3,21 +3,24 @@
 ---- 
 
 ## Features:
-- Add courses 
-- Remove courses 
+
 - Enroll as teacher
 - Enroll as student
-- Adopt a course as a teacher
+- Add courses , if teacher
 - Enroll for a course as a student 
 
 ## Tech Stack: 
 ---
 - Custom Generic Form rendering  - i'm gonna call it Toasty Forms , in loving memory of Django Crispy Forms
 - Custom Auth framework based on Sessions for Server Side Rendering - could have used Passport.js , but really wanted to re-learn things from scratch in JS this time. 
+- Custom flash messages framework. 
 - @hapi/joi - Form validation
 - express - base web framework
 - bootstrap/ bootswatch - UI framework
 - Pug - Templating Engine
+- bcrypt - for salted hashing of password
+- mongoose - for storing data in MongoDB 
+- datatables - for sorting and filtering Tables in HTML
 
 ---
 
@@ -30,17 +33,22 @@ npm start
 
 ```
 
+## Misc Framework features
+
+- constants.mjs files contains names like 'faculty' or 'student' for internationalisation/ localisation purposes in 
+- Flash messages using `req.session.messages` and `req.session.errors` which can be accessed by Pug as `messages` and `errors`.
+- All redirects take an optional `?next=` Query parameter that will redirect to current page or specified page after the redirection is complete.
+- @hapi/joi based validation.
+- Mongoose based ODM for mongoDB.
 
 ## Auth Module
 ---
 
 Express-session is used to maintain server side sessions. It can be configured to use persistent MongoStore sessions.
-- constants.mjs files contains names like 'faculty' or 'student' for internationalisation/ localisation purposes in 
+- 10 rounds of salted Hashes using bcrypt to store and compared passwords.
 - Authentication using `loginRequiredMiddleware`.
 - Authorization using `accessRequiredMiddleware` is based on a higher-order function that takes in `role` to return a middleware.
-- authContextMiddleware provides context data like `path` , `user` and flash messages `messages`  for Pug and other routes. 
-- Flash messages using `req.session.messages` which can be accessed by Pug as `messages`. 
-- All redirects take an optional `?next=` Query parameter that will redirect to current page after the redirection is complete.
+- authContextMiddleware provides context data like `path` , `user`, `isAuthenticated()` and flash messages `messages`  for Pug and other routes. 
 - `req.session.user` object is set on successful login and contains :
 
 ```js
@@ -143,3 +151,6 @@ var signupForm = {
         }
     )
    ```
+
+## Todo:
+- Make Objects for Forms that can automatically inherit validation , form rendering and default endpoints from Models.
