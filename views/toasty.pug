@@ -1,20 +1,5 @@
 extends base 
 
-//- form = { 
-//-     title: "", 
-//-     action: '',
-//-     submitText: '',
-//-     errors: [],
-//-     fields: [
-//-         { 
-//-             name: "", 
-//-             attrs: {},
-//-             helpText :'',
-//- 
-//-         }
-//-     ]
-//- }
-
 block title
     title= form.title || 'Form'
 
@@ -48,7 +33,7 @@ block content
                     strong= message
                     button( type="button" class="close" data-dismiss="alert" aria-label="Close" )
                         span(aria-hidden="true") &times;
-        .card
+        .card.shadow.rounded
             .card-header.text-center.text-white.bg-info
                 =title(form.title)
             form(method = 'POST' action = form.action || "" )
@@ -72,7 +57,7 @@ block content
                                             if( field.type !== 'date')
                                                 #{field.widget || 'input'}(id = camelize(field.name) name =camelize(field.name) type = field.type  value = field.default || form.values[camelize(field.name)] )&attributes(  field.attrs   ).form-control
                                             else
-                                                #{field.widget || 'input'}(id = camelize(field.name) name =camelize(field.name) type = field.type  value = field.default || form.values[camelize(field.name)].toISOString().slice(0,10) )&attributes(  field.attrs   ).form-control
+                                                #{field.widget || 'input'}(id = camelize(field.name) name =camelize(field.name) type = field.type  value = field.default || (form.values[camelize(field.name)] || new Date()) .toISOString().slice(0,10) )&attributes(  field.attrs   ).form-control
 
                                         else
                                             #{field.widget || 'input'}(id = camelize(field.name) name =camelize(field.name) type = field.type  value = field.default  )&attributes(  field.attrs   ).form-control

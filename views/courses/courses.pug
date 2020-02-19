@@ -5,24 +5,13 @@ block title
     title Course List
 
 block content 
-    .container.mt-5
-        if(messages)
-         for message in messages 
-            div( class="alert alert-info alert-dismissible fade show" role="alert" ).w-100
-                strong= message
-                button( type="button" class="close" data-dismiss="alert" aria-label="Close" )
-                    span(aria-hidden="true") &times;
+    include ../messages
     .container.mt-5.h-100
-        .card
+        .card.shadow.rounded
             .card-header.text-center.bg-info.text-white Courses offered
             .card-body.content-center
-                if( user.role === 'faculty')
-                    .row
-                        .col-md-2
-                        .col
-                            a.btn.btn-success.btn-block.my-4(href = '/courses/add') Add Course
-                        .col-md-2
-                if(courses )
+                br
+                if(courses != [] )
                     table.table#Table.my-4
                         thead.thead-dark
                             th Course Title
@@ -52,3 +41,23 @@ block content
 
                 else
                     .container-fluid.text-center No course found at this time :(
+                br
+                br
+            .card-footer
+                if( user.role === 'faculty')
+                    .row
+                        .col-md-2
+                        .col
+                            a.btn.btn-success.btn-block.my-4(href = '/courses/add') Add Course
+                        .col-md-2.my-4
+                        br
+
+block styles
+    style.
+        .dataTables_wrapper .dataTables_length {
+            float: left;
+        }
+        .dataTables_wrapper .dataTables_filter {
+            float: right;
+            text-align: left;
+        }

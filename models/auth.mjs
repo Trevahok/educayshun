@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 
-const FacultySchema = mongoose.Schema({
+export const FacultySchema = mongoose.Schema({
     email: {
         type : String, 
         required: true,
@@ -16,10 +16,11 @@ const FacultySchema = mongoose.Schema({
     address: {
         type: String,
         required: false,
-    }
+    },
+    courses: [ {type : mongoose.Schema.ObjectId, ref : 'Course', name: String} ]
 })
 
-const StudentSchema = mongoose.Schema({
+export const StudentSchema = mongoose.Schema({
     email: {
         type : String, 
         required: true,
@@ -35,7 +36,8 @@ const StudentSchema = mongoose.Schema({
     address: {
         type: String,
         required: false,
-    }
+    },
+    courses: [ {type : mongoose.Schema.ObjectId, ref : 'Course', name: String} ]
 })
 
 

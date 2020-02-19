@@ -9,6 +9,7 @@ import path from "path";
 import {dirname} from "path";
 import morgan from 'morgan'
 import { authContextMiddleware } from './middlewares/auth.mjs'
+import { flashMessageMiddleware } from './middlewares/auth.mjs'
 
 
 const app = express()
@@ -47,6 +48,7 @@ mongoose.connect(
 // middlewares
 
 app.use(authContextMiddleware)
+app.use(flashMessageMiddleware)
 
 
 // Include routes 

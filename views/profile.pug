@@ -1,0 +1,17 @@
+extends base
+
+block title
+    title Profile page
+
+block content
+    .container.m-4
+        .card
+            .card-header.text-center.bg-info.text-white
+                h3= profile.name
+            .card-body
+                if( profile.courses )
+                    for c in profile.courses
+                        p= c.title
+                else
+                    p.
+                        Not found data 

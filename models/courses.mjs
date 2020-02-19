@@ -1,6 +1,7 @@
 import mongoose from 'mongoose'
+import { StudentSchema } from "../models/auth.mjs";
 
-const CourseSchema = mongoose.Schema({
+export const CourseSchema = mongoose.Schema({
     title : {
         type: String,
         required: true
@@ -23,7 +24,8 @@ const CourseSchema = mongoose.Schema({
     instructor:{
         type: String,
         required:true,
-    }
+    },
+    students: [ {type : mongoose.Schema.ObjectId, ref : 'Student'} ]
 
 })
 

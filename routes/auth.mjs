@@ -4,6 +4,8 @@ import { loginValidator, signupValidator } from '../validators/auth.mjs'
 import { Student, Faculty } from '../models/auth.mjs'
 import bcrypt from 'bcrypt'
 import constants from '../constants.mjs'
+
+import { loginRequiredMiddleware} from '../middlewares/auth.mjs'
 const router = express.Router()
 
 async function passwordHasher( password ){
@@ -127,5 +129,21 @@ router.get('/logout', async (req, res) =>{
     return res.redirect('/')
 })
 
+router.get('/profile', loginRequiredMiddleware, async (req, res) =>{
+    try {
+        
+        var student = await Student.findOne({ _id :  req.session.user.id }).populate('courses')
+        var faculty = await Faculty.findOne({ _id :  req.session.user.id }).populate('courses')
+
+        if( !student && !faculty  ) res.sendStatus(404)
+
+
+    } catch (error) {
+        console.log(error)
+        res.sendStatus(500)
+        
+    }
+    res.render('profile' , {profile: student || faculty})
+})
 
 export default router
