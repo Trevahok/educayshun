@@ -42,4 +42,17 @@ router.post('/add', loginRequiredMiddleware,  accessRequiredMiddleware(constants
     res.render('toasty', {form: courseForm, messages:[ 'Success!']})
 })
 
+router.get('/:id/edit', loginRequiredMiddleware,  accessRequiredMiddleware(constants.faculty), async (req, res) => {
+    const instance = await Course.findOne({_id: req.params.id})
+    console.log(instance);
+    
+    if( !instance )
+        res.statusCode( 404 )
+    res.render('toasty' , { form: { values: instance ,...courseForm}})
+
+})
+router.post('/:id/edit', loginRequiredMiddleware,  accessRequiredMiddleware(constants.faculty), async (req, res) => {
+})
+router.post('/:id/edit', loginRequiredMiddleware,  accessRequiredMiddleware(constants.faculty), async (req, res) => {
+})
 export default router

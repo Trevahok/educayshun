@@ -69,7 +69,11 @@ block content
 
                                     else
                                         if(form.values )
-                                            #{field.widget || 'input'}(id = camelize(field.name) name =camelize(field.name) type = field.type  value = field.default || form.values[camelize(field.name)] )&attributes(  field.attrs   ).form-control
+                                            if( field.type !== 'date')
+                                                #{field.widget || 'input'}(id = camelize(field.name) name =camelize(field.name) type = field.type  value = field.default || form.values[camelize(field.name)] )&attributes(  field.attrs   ).form-control
+                                            else
+                                                #{field.widget || 'input'}(id = camelize(field.name) name =camelize(field.name) type = field.type  value = field.default || form.values[camelize(field.name)].toISOString().slice(0,10) )&attributes(  field.attrs   ).form-control
+
                                         else
                                             #{field.widget || 'input'}(id = camelize(field.name) name =camelize(field.name) type = field.type  value = field.default  )&attributes(  field.attrs   ).form-control
                                     if(field.helpText)

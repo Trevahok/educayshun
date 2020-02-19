@@ -7,6 +7,9 @@ html(lang='en')
         script( src="https://code.jquery.com/jquery-3.2.1.slim.min.js")
         script( src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js")
         script( src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js")
+        script( type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js")
+        script( src= "https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js")
+
         //- style.
         //-     body{
         //-         background-color: #e9ecef;
@@ -19,4 +22,8 @@ html(lang='en')
         include navbar
         block content
         block scripts
+        script.
+                $(document).ready(function () {
+                    $('#Table').DataTable();
+                });
 

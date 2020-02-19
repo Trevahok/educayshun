@@ -12,14 +12,18 @@ block content
                 strong= message
                 button( type="button" class="close" data-dismiss="alert" aria-label="Close" )
                     span(aria-hidden="true") &times;
-    .container.mt-5
+    .container.mt-5.h-100
         .card
             .card-header.text-center.bg-info.text-white Courses offered
             .card-body.content-center
                 if( user.role === 'faculty')
-                    a.btn.btn-success(href = '/courses/add') Add Course
+                    .row
+                        .col-md-2
+                        .col
+                            a.btn.btn-success.btn-block.my-4(href = '/courses/add') Add Course
+                        .col-md-2
                 if(courses )
-                    table.table.mt-4
+                    table.table#Table.my-4
                         thead.thead-dark
                             th Course Title
                             th Start Date
@@ -28,6 +32,8 @@ block content
                             if( user.role === 'faculty')
                                 th Edit
                                 th Delete
+                            else
+                                th Enroll
                         tbody
                             for course in courses
                                 tr
@@ -37,9 +43,12 @@ block content
                                     td= course.capacity
                                     if( user.role === 'faculty')
                                         td
-                                            button.btn.btn-secondary Edit
+                                            a.btn.btn-secondary(href= `/courses/${course.id}/edit`) Edit
                                         td
-                                            button.btn.btn-danger Delete
+                                            a.btn.btn-danger(href= `/courses/${course.id}/delete` ) Delete
+                                    else
+                                        td
+                                            a.btn.btn-danger(href= `/courses/${course.id}/enroll` ) Enroll
 
                 else
                     .container-fluid.text-center No course found at this time :(
