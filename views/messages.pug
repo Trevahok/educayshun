@@ -1,13 +1,13 @@
 .container.my-5.text-center
         if(errors)
             for error in errors 
-                div( class="alert alert-danger alert-dismissible fade show" role="alert" ).w-100
+                div( class="alert alert-danger alert-dismissible fade show shadow rounded" role="alert" ).w-100
                     strong= error
                     button( type="button" class="close" data-dismiss="alert" aria-label="Close" )
                         span(aria-hidden="true") &times;
         if(messages)
             for message in messages 
-                div( class="alert alert-info alert-dismissible fade show" role="alert" ).w-100
+                div( class="alert alert-info alert-dismissible fade show shadow rounded" role="alert" ).w-100
                     strong= message
                     button( type="button" class="close" data-dismiss="alert" aria-label="Close" )
                         span(aria-hidden="true") &times;

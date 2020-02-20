@@ -21,18 +21,7 @@ block content
 
 
     .container.my-5.col-md-5
-        - if(errors)
-            - for(let error of errors )
-                div( class="alert alert-danger alert-dismissible fade show" role="alert" ).w-100
-                    strong= error
-                    button( type="button" class="close" data-dismiss="alert" aria-label="Close" )
-                        span(aria-hidden="true") &times;
-        - if(messages)
-            - for(let message of messages )
-                div( class="alert alert-info alert-dismissible fade show" role="alert" ).w-100
-                    strong= message
-                    button( type="button" class="close" data-dismiss="alert" aria-label="Close" )
-                        span(aria-hidden="true") &times;
+        include messages
         .card.shadow.rounded
             .card-header.text-center.text-white.bg-info
                 =title(form.title)

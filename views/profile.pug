@@ -4,14 +4,30 @@ block title
     title Profile page
 
 block content
-    .container.m-4
+    .container.mt-4.col-md-5
         .card
             .card-header.text-center.bg-info.text-white
                 h3= profile.name
             .card-body
-                if( profile.courses )
-                    for c in profile.courses
-                        p= c.title
-                else
-                    p.
-                        Not found data 
+                .input-group.mb-3
+                    .input-group-prepend
+                        .input-group-text Role
+                    .form-control= user.role
+                .input-group.mb-3
+                    .input-group-prepend
+                        .input-group-text Email
+                    .form-control= profile.email
+                .input-group.mb-3
+                    .input-group-prepend
+                        .input-group-text Address
+                    .form-control= profile.address
+                
+                ul.list-group.list-group-flush
+                    li.list-group-item.active.d-flex.justify-content-between Registered Courses
+                        span(class="badge badge-success badge-pill")= profile.courses.length
+
+                    if( profile.courses )
+                        for c in profile.courses
+                            li.list-group-item= c.title
+                    else
+                        li.list-group-item No course registered.

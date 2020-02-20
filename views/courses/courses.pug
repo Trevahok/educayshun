@@ -32,13 +32,17 @@ block content
                                     td= course.capacity
                                     if( user.role === 'faculty')
                                         td
-                                            a.btn.btn-secondary(href= `/courses/${course.id}/edit`) Edit
+                                            a.btn.btn-warning(href= `/courses/${course.id}/edit`) Edit
                                         td
                                             a.btn.btn-danger(href= `/courses/${course.id}/delete` ) Delete
                                     else
-                                        td
-                                            a.btn.btn-danger(href= `/courses/${course.id}/enroll` ) Enroll
+                                        if( course.students.includes(user.id))
+                                            td
+                                                a.btn.btn-danger.disabled Enrolled
+                                        else
 
+                                            td
+                                                a.btn.btn-danger(href= `/courses/${course.id}/enroll` ) Enroll
                 else
                     .container-fluid.text-center No course found at this time :(
                 br
@@ -48,7 +52,7 @@ block content
                     .row
                         .col-md-2
                         .col
-                            a.btn.btn-success.btn-block.my-4(href = '/courses/add') Add Course
+                            a.btn.btn-success.btn-block(href = '/courses/add') Add Course
                         .col-md-2.my-4
                         br
 

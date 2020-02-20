@@ -85,7 +85,9 @@ Endpoints | Methods | Purpose
  /auth/login?next=/ | GET, POST | Login and set req.session.user and redirects |
  /auth/signup | GET, POST | Signup as faculty or student
  /auth/logout | GET | Destroys session and redirect to home
+ /auth/profile | GET | Displays profile data and registered course
  /courses     | GET |  List of courses to edit / enroll
+ /courses/:id/add| GET, POST |  To add a course using toasty forms
  /courses/:id/edit| GET, POST |  To edit a given course based on ID
  /courses/:id/delete| GET | To delete a course based on ID
  /course/:id/enroll | GET | For student to enroll in a course
