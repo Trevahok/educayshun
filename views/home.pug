@@ -4,7 +4,33 @@ block title
     title Home Page
 
 block content
-    div.container
-        div.jumbotron.mt-5.bg-white
+    .container
+        .jumbotron.mt-5.bg-white
             .jumbotron.m-0
                 h2.text-center.text-success Educayshun - Your Education Buddy !
+    .container
+        h3.text-center.my-3 Popular Courses
+        if(courses)
+            - for( let i =0; i< courses.length; i+= 3)
+                .row
+                    - for( let j =i; j< i+3; j++ )
+                        if(courses[j])
+                            .col-md-4
+                                .card
+                                    .card-header.text-white.bg-info= courses[j].title
+                                    .card-body
+                                        .input-group.mb-3
+                                            .input-group-prepend
+                                                .input-group-text Slots left
+                                                .form-control= courses[j].capacity
+                                        .input-group.mb-3
+                                            .input-group-prepend
+                                                .input-group-text Instructor
+                                                .form-control= courses[j].instructor
+                                    .card-footer
+                                        a.btn.btn-success.w-50= courses[j].from.toLocaleDateString()
+                                        a.btn.btn-danger.w-50= courses[j].to.toLocaleDateString()
+        else
+            p No courses yet 
+
+

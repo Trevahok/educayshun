@@ -8,8 +8,8 @@ import session from "express-session";
 import path from "path";
 import {dirname} from "path";
 import morgan from 'morgan'
-import { authContextMiddleware } from './middlewares/auth.mjs'
-import { flashMessageMiddleware } from './middlewares/auth.mjs'
+import { authContextMiddleware ,flashMessageMiddleware} from './middlewares/auth.mjs'
+import {Course} from './models/courses.mjs'
 
 
 const app = express()
@@ -58,8 +58,11 @@ app.use('/courses/', courseRoutes)
 
 
 // home routes 
-app.get('/', (req, res ) => {
-    res.render('home')
+app.get('/',  async (req, res ) => {
+
+    const courses = await Course.find()
+    console.log(courses)
+    res.render('home', {courses})
 })
 
 
