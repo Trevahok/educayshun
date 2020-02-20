@@ -37,69 +37,6 @@ npm install
 npm start
 
 ```
-### Flash messages framework
----
-Flash messages using `req.session.messages` and `req.session.errors` which can be accessed by Pug as `messages` and `errors` context variables.
-
-It can be used using `req.flash('message', type='error')` for viewing a flash message in any template. Required `include messages` pug template for message rendering or can use custom message rendering.
-
-Note: Include express-sessions, then authContextMiddleware and then flashMessagesMiddleware. In that order for it to work properly
-
-Usage Example :
-```js
-// routes.js 
-app.get('/' , (req, res)=>{
-    // ... content 
-    req.flash('this is an error', 'error')
-    req.flash('this is a message')
-    res.redirect('/')
-})
-```
-
-## Misc Framework features
----
-
-- constants.mjs files contains names like 'faculty' or 'student' for internationalisation/ localisation purposes in the future.
-- All redirects take an optional `?next=` Query parameter that will redirect to current page or specified page after the redirection is complete.
-- Request logging using Morgan.
-- All tables can be sorted and searched. 
-- Secrets served using dotenv library.
-
-## Auth Module
----
-
-Express-session is used to maintain server side sessions. It can be configured to use persistent MongoStore sessions.
-- 10 rounds of salted Hashes using bcrypt to store and compared passwords.
-- Authentication using `loginRequiredMiddleware`.
-- Authorization using `accessRequiredMiddleware` is based on a higher-order function that takes in `role` to return a middleware.
-- authContextMiddleware provides context data like `path` , `user`, `isAuthenticated()` and flash messages `messages`  for Pug and other routes. 
-- `req.session.user` object is set on successful login and contains :
-
-```js
-req.session.user  = {
-    id: user.id,
-    name: user.name,
-    role : 'student' || 'faculty'
-}
-```
-
-
-
-#### Endpoints: 
-Endpoints | Methods | Purpose
---- | --- | --- |
- /auth/login?next=/ | GET, POST | Login and set req.session.user and redirects |
- /auth/signup | GET, POST | Signup as faculty or student
- /auth/logout | GET | Destroys session and redirect to home
- /auth/profile | GET | Displays profile data and registered course
- /courses     | GET |  List of courses to edit / enroll
- /courses/:id/add| GET, POST |  To add a course using toasty forms
- /courses/:id/edit| GET, POST |  To edit a given course based on ID
- /courses/:id/delete| GET | To delete a course based on ID
- /course/:id/enroll | GET | For student to enroll in a course
-
-
-
 
 ## Toasty Forms - Generic Form rendering engine
 ---
@@ -194,3 +131,69 @@ var signupForm = {
 ## Todo:
 ---
 - Make Objects for Forms that can automatically inherit validation , form rendering and default endpoints from Models.
+
+
+### Flash messages framework
+---
+Flash messages using `req.session.messages` and `req.session.errors` which can be accessed by Pug as `messages` and `errors` context variables.
+
+It can be used using `req.flash('message', type='error')` for viewing a flash message in any template. Required `include messages` pug template for message rendering or can use custom message rendering.
+
+Note: Include express-sessions, then authContextMiddleware and then flashMessagesMiddleware. In that order for it to work properly
+
+Usage Example :
+```js
+// routes.js 
+app.get('/' , (req, res)=>{
+    // ... content 
+    req.flash('this is an error', 'error')
+    req.flash('this is a message')
+    res.redirect('/')
+})
+```
+
+## Misc Framework features
+---
+
+- constants.mjs files contains names like 'faculty' or 'student' for internationalisation/ localisation purposes in the future.
+- All redirects take an optional `?next=` Query parameter that will redirect to current page or specified page after the redirection is complete.
+- Request logging using Morgan.
+- All tables can be sorted and searched. 
+- Secrets served using dotenv library.
+
+## Auth Module
+---
+
+Express-session is used to maintain server side sessions. It can be configured to use persistent MongoStore sessions.
+- 10 rounds of salted Hashes using bcrypt to store and compared passwords.
+- Authentication using `loginRequiredMiddleware`.
+- Authorization using `accessRequiredMiddleware` is based on a higher-order function that takes in `role` to return a middleware. Usage: `app.get('/', loginRequiredMiddleware, accessRequiredMiddleware('role' ) , (req, res) => {}) `
+
+- authContextMiddleware provides context data like `path` , `user`, `isAuthenticated()` and flash messages `messages`  for Pug and other routes. 
+- `req.session.user` object is set on successful login and contains :
+
+```js
+req.session.user  = {
+    id: user.id,
+    name: user.name,
+    role : 'student' || 'faculty'
+}
+```
+
+
+#### Endpoints: 
+Endpoints | Methods | Purpose
+--- | --- | --- |
+ /auth/login?next=/ | GET, POST | Login and set req.session.user and redirects |
+ /auth/signup | GET, POST | Signup as faculty or student
+ /auth/logout | GET | Destroys session and redirect to home
+ /auth/profile | GET | Displays profile data and registered course
+ /courses     | GET |  List of courses to edit / enroll
+ /courses/:id     | GET |  Detail of a given course
+ /courses/add| GET, POST |  To add a course using toasty forms
+ /courses/:id/edit| GET, POST |  To edit a given course based on ID
+ /courses/:id/delete| GET | To delete a course based on ID
+ /course/:id/enroll | GET | For student to enroll in a course
+ /home| GET | A homepage containing list of courses
+
+
