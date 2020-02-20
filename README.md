@@ -1,6 +1,7 @@
 # Educayshun 
 ### Learn what you couldn't learn in class, online
 ---- 
+Author: Vignesh
 
 ## Features:
 
