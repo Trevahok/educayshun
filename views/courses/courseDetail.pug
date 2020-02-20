@@ -31,3 +31,13 @@ block content
                         a.btn.btn-danger.disabled.btn-block Enrolled
                     else
                         a.btn.btn-danger.btn-block(href= `/courses/${course.id}/enroll` ) Enroll
+    .container.mt-4.col-md-5
+        .card
+            .card-header.text-center.bg-info.text-light
+                h3.text-light Lessons 
+                .card-body
+                - for(let i=0; i< 5;i++)
+                    .input-group.mb-3
+                        .input-group-prepend
+                            .input-group-text= i
+                        .form-control= 'Lesson ' +i
