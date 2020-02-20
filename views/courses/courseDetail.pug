@@ -1,0 +1,33 @@
+extends ../base
+
+block title
+    title course.title
+
+block content
+    .container.mt-4.col-md-5
+        .card
+            .card-header.text-center.bg-info.text-light
+                h3.text-light= course.title
+            .card-body.jumbotron
+                .input-group.mb-3
+                    .input-group-prepend
+                        .input-group-text Instructor
+                    .form-control= course.instructor
+                .input-group.mb-3
+                    .input-group-prepend
+                        .input-group-text Capacity
+                    .form-control= course.capacity
+                .input-group.mb-3
+                    .input-group-prepend
+                        .input-group-text Duration
+                    .form-control= course.from.toLocaleDateString()  + ' - ' + course.to.toLocaleDateString()
+                
+            .card-footer
+                if( user.role === 'faculty')
+                    a.btn.btn-warning.w-50(href= `/courses/${course.id}/edit`) Edit
+                    a.btn.btn-danger.w-50(href= `/courses/${course.id}/delete` ) Delete
+                else
+                    if( course.students.includes(user.id))
+                        a.btn.btn-danger.disabled.btn-block Enrolled
+                    else
+                        a.btn.btn-danger.btn-block(href= `/courses/${course.id}/enroll` ) Enroll

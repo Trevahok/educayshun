@@ -46,10 +46,17 @@ router.post('/add', loginRequiredMiddleware, accessRequiredMiddleware(constants.
     res.redirect('/courses')
 
 })
+router.get('/:id', loginRequiredMiddleware, async (req, res) =>{
+    const instance = await Course.findOne({ _id: req.params.id })
+
+    if (!instance)
+        res.sendStatus(404)
+    res.render('courses/courseDetail', { course: instance } )
+
+})
 
 router.get('/:id/edit', loginRequiredMiddleware, accessRequiredMiddleware(constants.faculty), async (req, res) => {
     const instance = await Course.findOne({ _id: req.params.id })
-    console.log(instance);
 
     if (!instance)
         res.sendStatus(404)

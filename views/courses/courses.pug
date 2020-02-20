@@ -26,7 +26,8 @@ block content
                         tbody
                             for course in courses
                                 tr
-                                    td= course.title
+                                    td
+                                      a.btn.btn-info.btn-block(href=`/courses/${course.id}/`)= course.title
                                     td= course.from.toLocaleDateString()
                                     td= course.to.toLocaleDateString()
                                     td= course.capacity
@@ -49,12 +50,7 @@ block content
                 br
             .card-footer
                 if( user.role === 'faculty')
-                    .row
-                        .col-md-2
-                        .col
-                            a.btn.btn-success.btn-block(href = '/courses/add') Add Course
-                        .col-md-2.my-4
-                        br
+                    a.btn.btn-success.btn-block(href = '/courses/add') Add Course
 
 block styles
     style.

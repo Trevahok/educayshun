@@ -2,6 +2,9 @@
 ### Learn what you couldn't learn in class, online
 ---- 
 Author: Vignesh
+Deployed at: https://educayshun.herokuapp.com
+
+For viewing enrolled courses or teaching courses, view profile page. 
 
 ## Features:
 
@@ -20,8 +23,9 @@ Author: Vignesh
 - bootstrap/ bootswatch - UI framework
 - Pug - Templating Engine
 - bcrypt - for salted hashing of password
-- mongoose - for storing data in MongoDB 
+- mongoose - for storing data in MongoDB using MongoDB Atlas on the cloud
 - datatables - for sorting and filtering Tables in HTML
+- heroku - for deployed version. 
 
 ---
 
@@ -59,6 +63,7 @@ app.get('/' , (req, res)=>{
 - All redirects take an optional `?next=` Query parameter that will redirect to current page or specified page after the redirection is complete.
 - Request logging using Morgan.
 - All tables can be sorted and searched. 
+- Secrets served using dotenv library.
 
 ## Auth Module
 ---
